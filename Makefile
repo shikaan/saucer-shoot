@@ -15,39 +15,20 @@
 #
 
 # Compiler.
-CC= g++ 
+CC= g++
 
-# Libraries and includes.
-LINKDIR= -L../dragonfly/lib # path to dragonfly library
-INCDIR= -I../dragonfly/include # path to dragonfly includes
+LINKDIR= -L./lib
+INCDIR= -I./include # path to dragonfly includes
 
-### Uncomment and update below if using local SFML installation.
-LOCALSFML= $(HOME)/src/SFML-2.5.1
-LINKDIR:= $(LINKDIR) -L $(LOCALSFML)/lib
-INCDIR:= $(INCDIR) -I$(LOCALSFML)/include
-
-### Uncomment either 1) or 2) below! ###
-
-## 1) For Linux:
 CFLAGS= -Wall
 LINKLIB= -l$(ENG) -lsfml-graphics -lsfml-window -lsfml-system -lsfml-audio -lrt
 ENG= dragonfly-x64-linux
-
-## 2) For Mac:
-# Note: for homebrew, sfml may be in: /usr/local/Cellar/sfml/2.5.1
-#LOCALSFML= $(HOME)/src/SFML-2.5.1
-#LINKDIR:= $(LINKDIR) -L $(LOCALSFML)/lib
-#CFLAGS= -MD
-#LINKLIB= -l$(ENG) -lsfml-graphics -lsfml-window -lsfml-system -lsfml-audio 
-## And uncomment ONE of two engine below based on the CPU arch:
-#ENG= dragonfly-x64-mac
-#ENG= dragonfly-arm64-mac
 
 ######
 
 GAMESRC= \
 
-GAME= game.cpp
+GAME= src/game.cpp
 EXECUTABLE= game
 OBJECTS= $(GAMESRC:.cpp=.o)
 CFLAGS:= $(CFLAGS) -std=c++11
