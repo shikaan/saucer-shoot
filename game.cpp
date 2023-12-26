@@ -2,8 +2,14 @@
 #include "LogManager.h"
 #include "ResourceManager.h"
 
+#include "src/Saucer.h"
+
 void loadResources(void) {
-  RM.loadSprite("");
+  RM.loadSprite("sprites/saucer-spr.txt", "saucer");
+}
+
+void populateWorld(void) {
+  new Saucer;
 }
 
 int main(int argc, char *argv[]) {
@@ -19,6 +25,11 @@ int main(int argc, char *argv[]) {
 
   // Show splash screen.
   df::splash();
+
+  loadResources();
+  populateWorld();
+
+  GM.run();
 
   // Shut everything down.
   GM.shutDown();

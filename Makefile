@@ -18,7 +18,7 @@
 CC= g++
 
 LINKDIR= -L./lib
-INCDIR= -I./include # path to dragonfly includes
+INCDIR= -I./include
 
 CFLAGS= -Wall
 LINKLIB= -l$(ENG) -lsfml-graphics -lsfml-window -lsfml-system -lsfml-audio -lrt
@@ -26,9 +26,9 @@ ENG= dragonfly-x64-linux
 
 ######
 
-GAMESRC= \
+GAMESRC= src/*.cpp
 
-GAME= src/game.cpp
+GAME= game.cpp
 EXECUTABLE= game
 OBJECTS= $(GAMESRC:.cpp=.o)
 CFLAGS:= $(CFLAGS) -std=c++11
