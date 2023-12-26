@@ -3,13 +3,16 @@
 #include "ResourceManager.h"
 
 #include "src/Saucer.h"
+#include "src/Hero.h"
 
 void loadResources(void) {
   RM.loadSprite("sprites/saucer-spr.txt", "saucer");
+  RM.loadSprite("sprites/ship-spr.txt", "ship");
 }
 
 void populateWorld(void) {
   new Saucer;
+  new Hero;
 }
 
 int main(int argc, char *argv[]) {
