@@ -5,6 +5,7 @@
 #include "src/Saucer.h"
 #include "src/Hero.h"
 #include "src/Points.h"
+#include "src/Star.h"
 
 void loadResources(void)
 {
@@ -17,11 +18,12 @@ void loadResources(void)
 void populateWorld(void)
 {
   for (int i = 0; i < 16; i++)
-  {
     new Saucer;
-  }
 
   new Hero;
+
+  for (int i = 0; i < 16; i++)
+    new Star;
 
   new Points;
 
