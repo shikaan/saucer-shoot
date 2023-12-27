@@ -1,4 +1,5 @@
 #include "Object.h"
+#include "EventCollision.h"
 
 class Saucer : public df::Object
 {
@@ -11,4 +12,6 @@ public:
   void out();
   // Moves the saucer to the start of the screen
   void moveToStart();
+
+  void hit(const df::EventCollision *p_event_collision);
 };
