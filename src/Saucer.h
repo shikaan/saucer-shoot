@@ -11,6 +11,7 @@ private:
 
 public:
   Saucer();
+  ~Saucer();
 
   int eventHandler(const df::Event *p_e) override;
 };

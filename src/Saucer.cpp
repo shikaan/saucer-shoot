@@ -6,6 +6,8 @@
 #include "Explosion.h"
 #include "EventNuke.h"
 #include "LogManager.h"
+#include "EventView.h"
+#include "Points.h"
 
 Saucer::Saucer()
 {
@@ -19,18 +21,22 @@ Saucer::Saucer()
   registerInterest(NUKE_EVENT);
 }
 
+Saucer::~Saucer()
+{
+  df::EventView ev(POINTS_STRING, 10, true);
+  WM.onEvent(&ev);
+}
+
 int Saucer::eventHandler(const df::Event *p_e)
 {
   if (p_e->getType() == df::OUT_EVENT)
   {
-    LM.writeLog("out event");
     out();
     return 1;
   }
 
   if (p_e->getType() == df::COLLISION_EVENT)
   {
-    LM.writeLog("collision event");
     const df::EventCollision *p_collision_event = dynamic_cast<const df::EventCollision *>(p_e);
     hit(p_collision_event);
     return 1;
@@ -38,12 +44,10 @@ int Saucer::eventHandler(const df::Event *p_e)
 
   if (p_e->getType() == NUKE_EVENT)
   {
-    LM.writeLog("saucer gets nuke event");
     explode();
     return 1;
   }
 
-  LM.writeLog("other event");
   return 0;
 }
 
@@ -65,7 +69,7 @@ void Saucer::moveToStart()
   float world_v = WM.getBoundary().getVertical();
 
   temp_position.setX(world_h + rand() % (int)world_h + 3.0f);
-  temp_position.setY(rand() % (int)(world_v - 1) + 1.0f);
+  temp_position.setY(rand() % (int)(world_v - 4) + 3.0f);
 
   df::ObjectList collision_list = WM.getCollisions(this, temp_position);
   while (!collision_list.isEmpty())

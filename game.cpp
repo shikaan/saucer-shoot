@@ -4,6 +4,7 @@
 
 #include "src/Saucer.h"
 #include "src/Hero.h"
+#include "src/Points.h"
 
 void loadResources(void)
 {
@@ -21,6 +22,14 @@ void populateWorld(void)
   }
 
   new Hero;
+
+  new Points;
+
+  df::ViewObject *p_vo = new df::ViewObject;
+  p_vo->setLocation(df::TOP_LEFT);
+  p_vo->setViewString("Nukes");
+  p_vo->setValue(1);
+  p_vo->setColor(df::YELLOW);
 }
 
 int main(int argc, char *argv[])
