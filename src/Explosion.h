@@ -1,12 +1,11 @@
 #include "Object.h"
 
-class Explosion : public df::Object
-{
-private:
+class Explosion : public df::Object {
+ private:
   int time_to_live;
   void step();
 
-public:
+ public:
   Explosion();
-  int eventHandler(const df::Event *p_event) override;
+  int eventHandler(const df::Event* p_event) override;
 };

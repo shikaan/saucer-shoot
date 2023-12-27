@@ -10,10 +10,8 @@
 #include "./Bullet.h"
 #include "./EventNuke.h"
 
-void Hero::kbd(const df::EventKeyboard *p_keyboard_event)
-{
-  switch (p_keyboard_event->getKey())
-  {
+void Hero::kbd(const df::EventKeyboard* p_keyboard_event) {
+  switch (p_keyboard_event->getKey()) {
   case df::Keyboard::Q:
     if (p_keyboard_event->getKeyboardAction() == df::KEY_PRESSED)
       GM.setGameOver();
@@ -28,20 +26,16 @@ void Hero::kbd(const df::EventKeyboard *p_keyboard_event)
     break;
   case df::Keyboard::SPACE:
     if (p_keyboard_event->getKeyboardAction() == df::KEY_PRESSED)
-    {
       nuke();
-    }
     break;
   default:
     break;
   }
 }
 
-void Hero::move(int dy)
-{
+void Hero::move(int dy) {
   // See if time to move.
-  if (move_countdown > 0)
-    return;
+  if (move_countdown > 0)  return;
   move_countdown = move_slowdown;
 
   df::Vector old_position = getPosition();
@@ -49,23 +43,19 @@ void Hero::move(int dy)
 
   bool is_within_boundaries = new_position.getY() > 3 && new_position.getY() < WM.getBoundary().getVertical() - 1;
 
-  if (is_within_boundaries)
-  {
+  if (is_within_boundaries) {
     WM.moveObject(this, new_position);
   }
 }
 
-void Hero::step()
-{
+void Hero::step() {
   move_countdown--;
-  if (move_countdown < 0)
-  {
+  if (move_countdown < 0) {
     move_countdown = 0;
   }
 
   fire_countdown--;
-  if (fire_countdown < 0)
-  {
+  if (fire_countdown < 0) {
     fire_countdown = 0;
   }
 }
@@ -79,7 +69,7 @@ void Hero::fire(df::Vector target)
   df::Vector v = target - getPosition();
   v.normalize();
   v.scale(1);
-  Bullet *b = new Bullet(getPosition());
+  Bullet* b = new Bullet(getPosition());
   b->setVelocity(v);
 
   setSolidness(df::SOFT);
@@ -109,25 +99,25 @@ Hero::Hero()
   nuke_count = 1;
 }
 
-void Hero::mouse(const df::EventMouse *p_mouse_event)
+void Hero::mouse(const df::EventMouse* p_mouse_event)
 {
   if ((p_mouse_event->getMouseAction() == df::CLICKED) &&
-      (p_mouse_event->getMouseButton() == df::Mouse::LEFT))
+    (p_mouse_event->getMouseButton() == df::Mouse::LEFT))
     fire(p_mouse_event->getMousePosition());
 }
 
-int Hero::eventHandler(const df::Event *p_e)
+int Hero::eventHandler(const df::Event* p_e)
 {
   if (p_e->getType() == df::KEYBOARD_EVENT)
   {
-    const df::EventKeyboard *p_keyboard_event = dynamic_cast<const df::EventKeyboard *>(p_e);
+    const df::EventKeyboard* p_keyboard_event = dynamic_cast<const df::EventKeyboard*>(p_e);
     kbd(p_keyboard_event);
     return 1;
   }
 
   if (p_e->getType() == df::MSE_EVENT)
   {
-    const df::EventMouse *p_mouse_event = dynamic_cast<const df::EventMouse *>(p_e);
+    const df::EventMouse* p_mouse_event = dynamic_cast<const df::EventMouse*>(p_e);
     mouse(p_mouse_event);
     return 1;
   }

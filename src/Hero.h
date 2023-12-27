@@ -1,12 +1,10 @@
-#include "Object.h"
+#include "./Reticle.h"
 #include "EventKeyboard.h"
 #include "EventMouse.h"
+#include "Object.h"
 
-#include "./Reticle.h"
-
-class Hero : public df::Object
-{
-private:
+class Hero : public df::Object {
+ private:
   void kbd(const df::EventKeyboard *p_keyboard_event);
   void mouse(const df::EventMouse *p_mouse_event);
   void move(int dy);
@@ -21,7 +19,7 @@ private:
   int nuke_count;
   Reticle *p_reticle;
 
-public:
+ public:
   Hero();
   int eventHandler(const df::Event *p_e) override;
 };

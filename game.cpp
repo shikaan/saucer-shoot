@@ -1,29 +1,24 @@
 #include "GameManager.h"
 #include "LogManager.h"
 #include "ResourceManager.h"
-
-#include "src/Saucer.h"
 #include "src/Hero.h"
 #include "src/Points.h"
+#include "src/Saucer.h"
 #include "src/Star.h"
 
-void loadResources(void)
-{
+void loadResources(void) {
   RM.loadSprite("sprites/saucer-spr.txt", "saucer");
   RM.loadSprite("sprites/ship-spr.txt", "ship");
   RM.loadSprite("sprites/bullet-spr.txt", "bullet");
   RM.loadSprite("sprites/explosion-spr.txt", "explosion");
 }
 
-void populateWorld(void)
-{
-  for (int i = 0; i < 16; i++)
-    new Saucer;
+void populateWorld(void) {
+  for (int i = 0; i < 16; i++) new Saucer;
 
   new Hero;
 
-  for (int i = 0; i < 16; i++)
-    new Star;
+  for (int i = 0; i < 16; i++) new Star;
 
   new Points;
 
@@ -34,11 +29,9 @@ void populateWorld(void)
   p_vo->setColor(df::YELLOW);
 }
 
-int main(int argc, char *argv[])
-{
+int main(int argc, char *argv[]) {
   // Start up game manager.
-  if (GM.startUp())
-  {
+  if (GM.startUp()) {
     LM.writeLog("Error starting game manager!");
     GM.shutDown();
     return 1;

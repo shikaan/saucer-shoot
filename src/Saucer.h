@@ -1,15 +1,14 @@
-#include "Object.h"
 #include "EventCollision.h"
+#include "Object.h"
 
-class Saucer : public df::Object
-{
-private:
+class Saucer : public df::Object {
+ private:
   void out();
   void moveToStart();
   void explode();
   void hit(const df::EventCollision *p_event_collision);
 
-public:
+ public:
   Saucer();
   ~Saucer();
 

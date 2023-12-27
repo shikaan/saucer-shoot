@@ -2,8 +2,7 @@
 
 const std::string NUKE_EVENT = "nuke";
 
-class EventNuke : public df::Event
-{
+class EventNuke : public df::Event {
 public:
   EventNuke();
 };
