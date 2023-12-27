@@ -12,19 +12,23 @@ void Explosion::step()
 Explosion::Explosion()
 {
   setType("Explosion");
-  if (setSprite("explosion") == 0) {
+  if (setSprite("explosion") == 0)
+  {
     time_to_live = getAnimation().getSprite()->getFrameCount();
-  } else {
+  }
+  else
+  {
     time_to_live = 0;
   }
 
   setSolidness(df::SPECTRAL);
-  registerInterest(df::STEP_EVENT );
+  registerInterest(df::STEP_EVENT);
 }
 
 int Explosion::eventHandler(const df::Event *p_event)
 {
-  if (p_event->getType() == df::STEP_EVENT) {
+  if (p_event->getType() == df::STEP_EVENT)
+  {
     step();
     return 1;
   }

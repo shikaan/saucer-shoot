@@ -5,21 +5,29 @@
 #include "src/Saucer.h"
 #include "src/Hero.h"
 
-void loadResources(void) {
+void loadResources(void)
+{
   RM.loadSprite("sprites/saucer-spr.txt", "saucer");
   RM.loadSprite("sprites/ship-spr.txt", "ship");
   RM.loadSprite("sprites/bullet-spr.txt", "bullet");
   RM.loadSprite("sprites/explosion-spr.txt", "explosion");
 }
 
-void populateWorld(void) {
-  new Saucer;
+void populateWorld(void)
+{
+  for (int i = 0; i < 16; i++)
+  {
+    new Saucer;
+  }
+
   new Hero;
 }
 
-int main(int argc, char *argv[]) {
+int main(int argc, char *argv[])
+{
   // Start up game manager.
-  if (GM.startUp())  {
+  if (GM.startUp())
+  {
     LM.writeLog("Error starting game manager!");
     GM.shutDown();
     return 1;
@@ -40,4 +48,3 @@ int main(int argc, char *argv[]) {
   GM.shutDown();
   return 0;
 }
-
