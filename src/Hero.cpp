@@ -2,6 +2,10 @@
 #include "WorldManager.h"
 #include "GameManager.h"
 #include "EventStep.h"
+#include "EventMouse.h"
+
+// Local
+#include "./Bullet.h"
 
 void Hero::kbd(const df::EventKeyboard *p_keyboard_event)
 {
@@ -43,6 +47,26 @@ void Hero::step() {
   if (move_countdown < 0) {
     move_countdown = 0;
   }
+
+  fire_countdown--;
+  if (fire_countdown < 0) {
+    fire_countdown = 0;
+  }
+}
+
+void Hero::fire(df::Vector target)
+{
+    if (fire_countdown > 0)
+      return;
+    fire_countdown = fire_slowdown;
+
+    df::Vector v = target - getPosition();
+    v.normalize();
+    v.scale(1);
+    Bullet *b = new Bullet(getPosition());
+    b->setVelocity(v);
+
+    setSolidness(df::SOFT);
 }
 
 Hero::Hero()
@@ -56,8 +80,18 @@ Hero::Hero()
   move_slowdown = 2;
   move_countdown = move_slowdown;
 
+  fire_countdown = 15;
+  fire_slowdown = fire_countdown;
+
   registerInterest(df::STEP_EVENT);
   registerInterest(df::KEYBOARD_EVENT);
+  registerInterest(df::MSE_EVENT);
+}
+
+void Hero::mouse(const df::EventMouse *p_mouse_event) {
+  if ((p_mouse_event->getMouseAction() == df::CLICKED) &&
+      (p_mouse_event->getMouseButton() == df::Mouse::LEFT))
+    fire(p_mouse_event->getMousePosition());
 }
 
 int Hero::eventHandler(const df::Event *p_e)
@@ -65,6 +99,12 @@ int Hero::eventHandler(const df::Event *p_e)
   if (p_e->getType() == df::KEYBOARD_EVENT) {
     const df::EventKeyboard *p_keyboard_event = dynamic_cast <const df::EventKeyboard *> (p_e);
     kbd(p_keyboard_event);
+    return 1;
+  }
+
+  if (p_e->getType() == df::MSE_EVENT) {
+    const df::EventMouse *p_mouse_event = dynamic_cast <const df::EventMouse *> (p_e);
+    mouse(p_mouse_event);
     return 1;
   }
 

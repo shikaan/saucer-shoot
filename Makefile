@@ -26,7 +26,7 @@ ENG= dragonfly-x64-linux
 
 ######
 
-GAMESRC= src/Hero.cpp src/Saucer.cpp
+GAMESRC= src/Bullet.cpp src/Hero.cpp src/Saucer.cpp
 
 GAME= game.cpp
 EXECUTABLE= game
