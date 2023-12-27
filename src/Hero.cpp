@@ -6,6 +6,8 @@
 
 // Local
 #include "./Bullet.h"
+#include "./EventNuke.h"
+#include "LogManager.h"
 
 void Hero::kbd(const df::EventKeyboard *p_keyboard_event)
 {
@@ -22,6 +24,13 @@ void Hero::kbd(const df::EventKeyboard *p_keyboard_event)
   case df::Keyboard::S:
     if (p_keyboard_event->getKeyboardAction() == df::KEY_PRESSED)
       move(+1);
+    break;
+  case df::Keyboard::SPACE:
+    if (p_keyboard_event->getKeyboardAction() == df::KEY_PRESSED)
+    {
+      LM.writeLog("space pressed");
+      nuke();
+    }
     break;
   default:
     break;
@@ -96,6 +105,8 @@ Hero::Hero()
 
   p_reticle = new Reticle();
   p_reticle->draw();
+
+  nuke_count = 10;
 }
 
 void Hero::mouse(const df::EventMouse *p_mouse_event)
@@ -128,4 +139,14 @@ int Hero::eventHandler(const df::Event *p_e)
   }
 
   return 0;
+}
+
+void Hero::nuke()
+{
+  if (nuke_count <= 0)
+    return;
+  nuke_count--;
+
+  EventNuke nuke;
+  WM.onEvent(&nuke);
 }

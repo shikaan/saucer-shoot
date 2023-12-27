@@ -11,12 +11,14 @@ private:
   void mouse(const df::EventMouse *p_mouse_event);
   void move(int dy);
   void step();
+  void nuke();
   void fire(df::Vector target);
 
   int move_slowdown;
   int move_countdown;
   int fire_slowdown;
   int fire_countdown;
+  int nuke_count;
   Reticle *p_reticle;
 
 public:
