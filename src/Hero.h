@@ -2,6 +2,8 @@
 #include "EventKeyboard.h"
 #include "EventMouse.h"
 
+#include "./Reticle.h"
+
 class Hero : public df::Object {
   private:
     void kbd(const df::EventKeyboard *p_keyboard_event);
@@ -10,12 +12,11 @@ class Hero : public df::Object {
     void step();
     void fire(df::Vector target);
 
-
     int move_slowdown;
     int move_countdown;
     int fire_slowdown;
     int fire_countdown;
-
+    Reticle *p_reticle;
 
   public:
     Hero();

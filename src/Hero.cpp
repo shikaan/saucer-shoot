@@ -86,6 +86,9 @@ Hero::Hero()
   registerInterest(df::STEP_EVENT);
   registerInterest(df::KEYBOARD_EVENT);
   registerInterest(df::MSE_EVENT);
+
+  p_reticle = new Reticle();
+  p_reticle->draw();
 }
 
 void Hero::mouse(const df::EventMouse *p_mouse_event) {
