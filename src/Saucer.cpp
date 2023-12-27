@@ -79,8 +79,6 @@ void Saucer::hit(const df::EventCollision *p_event_collision) {
       p_event_collision->getObject2()->getType() == "Hero") {
     WM.markForDelete(p_event_collision->getObject1());
     WM.markForDelete(p_event_collision->getObject2());
-
-    GM.setGameOver();
   }
 }
 

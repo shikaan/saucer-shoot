@@ -21,5 +21,6 @@ class Hero : public df::Object {
 
  public:
   Hero();
+  ~Hero();
   int eventHandler(const df::Event *p_e) override;
 };
