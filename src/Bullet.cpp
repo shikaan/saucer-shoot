@@ -2,6 +2,9 @@
 #include "EventOut.h"
 #include "WorldManager.h"
 
+#include "./Explosion.h"
+#include "./Saucer.h"
+
 void Bullet::out()
 {
   WM.markForDelete(this);
@@ -15,6 +18,18 @@ void Bullet::hit(const df::EventCollision *p_collision_event)
   if (first->getType() == "Saucer" || second->getType() == "Saucer") {
     WM.markForDelete(first);
     WM.markForDelete(second);
+  }
+
+  if ((first -> getType() == "Saucer") && (second -> getType() == "Saucer")) {
+    return;
+  }
+
+  if (first->getType() == "Bullet" || second->getType() == "Bullet") {
+    Explosion *p_explosion = new Explosion;
+    p_explosion->setPosition(this -> getPosition());
+
+    // Create an enemy when the old one dies
+    new Saucer;
   }
 }
 

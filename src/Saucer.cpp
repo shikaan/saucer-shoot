@@ -14,7 +14,6 @@ Saucer::Saucer()
 }
 
 int Saucer::eventHandler(const df::Event *p_e) {
-  
   if (p_e->getType() == df::OUT_EVENT) {
     out();
     return 1;
