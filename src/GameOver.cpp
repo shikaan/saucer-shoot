@@ -30,9 +30,9 @@ GameOver::~GameOver() {
 
     if (p_o->getType() != "Saucer" || p_o->getType() == "ViewObject")
       WM.markForDelete(p_o);
-  }
 
-  GM.setGameOver();
+    if (p_o->getType() == "GameStart") p_o->setActive(true);
+  }
 }
 
 int GameOver::eventHandler(const df::Event* p_e) {

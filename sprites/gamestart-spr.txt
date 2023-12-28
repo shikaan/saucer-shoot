@@ -12,7 +12,7 @@ slowdown 15
    ___/ / /_/ / /_/ / /__/  __/ /      ___/ / / / / /_/ / /_/ / /_    
   /____/\__,_/\__,_/\___/\___/_/      /____/_/ /_/\____/\____/\__/    
                                                                       
-     Controls: 'w'/'s' moves, Mouse fires, Space nukes, 'q' quits     
+   Controls: 'up'/'down' moves, Mouse fires, Space nukes, 'q' quits   
                                                                       
                     Press 'p' to play, 'q' to quit                    
 end
@@ -22,7 +22,7 @@ end
    ___/ / /_/ / /_/ / /__/  __/ /      ___/ / / / / /_/ / /_/ / /_    
   /____/\__,_/\__,_/\___/\___/_/      /____/_/ /_/\____/\____/\__/    
                                                                       
-     Controls: 'w'/'s' moves, Mouse fires, Space nukes, 'q' quits     
+   Controls: 'up'/'down' moves, Mouse fires, Space nukes, 'q' quits   
                                                                       
                                                                       
 end

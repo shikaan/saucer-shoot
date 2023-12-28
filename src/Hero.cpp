@@ -15,7 +15,7 @@ void Hero::kbd(const df::EventKeyboard* p_keyboard_event) {
   switch (p_keyboard_event->getKey()) {
     case df::Keyboard::Q:
       if (p_keyboard_event->getKeyboardAction() == df::KEY_PRESSED)
-        GM.setGameOver();
+        WM.markForDelete(this);
       break;
     case df::Keyboard::UPARROW:
       if (p_keyboard_event->getKeyboardAction() == df::KEY_PRESSED) move(-1);

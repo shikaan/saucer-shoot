@@ -1,6 +1,7 @@
 #include "GameManager.h"
 #include "LogManager.h"
 #include "ResourceManager.h"
+#include "src/GameStart.h"
 #include "src/Hero.h"
 #include "src/Points.h"
 #include "src/Saucer.h"
@@ -12,22 +13,13 @@ void loadResources(void) {
   RM.loadSprite("sprites/bullet-spr.txt", "bullet");
   RM.loadSprite("sprites/explosion-spr.txt", "explosion");
   RM.loadSprite("sprites/gameover-spr.txt", "gameover");
+  RM.loadSprite("sprites/gamestart-spr.txt", "gamestart");
 }
 
 void populateWorld(void) {
-  for (int i = 0; i < 16; i++) new Saucer;
-
-  new Hero;
-
   for (int i = 0; i < 16; i++) new Star;
 
-  new Points;
-
-  df::ViewObject *p_vo = new df::ViewObject;
-  p_vo->setLocation(df::TOP_LEFT);
-  p_vo->setViewString("Nukes");
-  p_vo->setValue(1);
-  p_vo->setColor(df::YELLOW);
+  new GameStart();
 }
 
 int main(int argc, char *argv[]) {
