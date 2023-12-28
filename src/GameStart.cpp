@@ -4,6 +4,7 @@
 #include "GameManager.h"
 #include "Hero.h"
 #include "Points.h"
+#include "ResourceManager.h"
 #include "Saucer.h"
 
 GameStart::GameStart() {
@@ -11,6 +12,18 @@ GameStart::GameStart() {
   setSprite("gamestart");
   setLocation(df::CENTER_CENTER);
   registerInterest(df::KEYBOARD_EVENT);
+
+  p_music = RM.getMusic("start music");
+  toggleMusic(true);
+}
+
+void GameStart::toggleMusic(bool on) {
+  if (!p_music) return;
+
+  if (on)
+    p_music->play(true);
+  else
+    p_music->pause();
 }
 
 int GameStart::eventHandler(const df::Event *p_e) {
@@ -38,6 +51,12 @@ int GameStart::eventHandler(const df::Event *p_e) {
 
 int GameStart::draw() { return df::Object::draw(); }
 
+int GameStart::setActive(bool new_active) {
+  toggleMusic(new_active);
+
+  return df::Object::setActive(new_active);
+}
+
 void GameStart::start() {
   for (int i = 0; i < 16; i++) new Saucer;
 
@@ -52,4 +71,5 @@ void GameStart::start() {
   p_vo->setColor(df::YELLOW);
 
   setActive(false);
+  p_music->pause();
 }

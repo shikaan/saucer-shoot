@@ -2,6 +2,8 @@
 
 #include "EventStep.h"
 #include "GameManager.h"
+#include "GameStart.h"
+#include "ResourceManager.h"
 #include "WorldManager.h"
 
 void GameOver::step() {
@@ -20,6 +22,8 @@ GameOver::GameOver() {
 
   setLocation(df::CENTER_CENTER);
   registerInterest(df::STEP_EVENT);
+  df::Sound* p_sound = RM.getSound("game over");
+  if (p_sound) p_sound->play();
 }
 
 GameOver::~GameOver() {
@@ -28,10 +32,12 @@ GameOver::~GameOver() {
   for (i.first(); !i.isDone(); i.next()) {
     df::Object* p_o = i.currentObject();
 
-    if (p_o->getType() != "Saucer" || p_o->getType() == "ViewObject")
+    if (p_o->getType() == "Saucer" || p_o->getType() == "ViewObject")
       WM.markForDelete(p_o);
 
-    if (p_o->getType() == "GameStart") p_o->setActive(true);
+    if (p_o->getType() == "GameStart") {
+      p_o->setActive(true);
+    }
   }
 }
 

@@ -1,5 +1,6 @@
 #include "GameManager.h"
 #include "LogManager.h"
+#include "Pause.h"
 #include "ResourceManager.h"
 #include "src/GameStart.h"
 #include "src/Hero.h"
@@ -14,6 +15,13 @@ void loadResources(void) {
   RM.loadSprite("sprites/explosion-spr.txt", "explosion");
   RM.loadSprite("sprites/gameover-spr.txt", "gameover");
   RM.loadSprite("sprites/gamestart-spr.txt", "gamestart");
+
+  RM.loadSound("sounds/fire.wav", "fire");
+  RM.loadSound("sounds/explode.wav", "explode");
+  RM.loadSound("sounds/nuke.wav", "nuke");
+  RM.loadSound("sounds/game-over.wav", "game over");
+
+  RM.loadMusic("sounds/start-music.wav", "start music");
 }
 
 void populateWorld(void) {
@@ -38,6 +46,7 @@ int main(int argc, char *argv[]) {
 
   loadResources();
   populateWorld();
+  new df::Pause(df::Keyboard::F10);
 
   GM.run();
 

@@ -8,6 +8,7 @@
 #include "GameManager.h"
 #include "LogManager.h"
 #include "Points.h"
+#include "ResourceManager.h"
 #include "WorldManager.h"
 
 Saucer::Saucer() {
@@ -79,6 +80,9 @@ void Saucer::hit(const df::EventCollision *p_event_collision) {
       p_event_collision->getObject2()->getType() == "Hero") {
     WM.markForDelete(p_event_collision->getObject1());
     WM.markForDelete(p_event_collision->getObject2());
+
+    df::Sound *p_sound = RM.getSound("explode");
+    if (p_sound) p_sound->play();
   }
 }
 

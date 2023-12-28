@@ -10,6 +10,7 @@
 #include "./EventNuke.h"
 #include "./GameOver.h"
 #include "./Hero.h"
+#include "ResourceManager.h"
 
 void Hero::kbd(const df::EventKeyboard* p_keyboard_event) {
   switch (p_keyboard_event->getKey()) {
@@ -71,6 +72,8 @@ void Hero::fire(df::Vector target) {
   b->setVelocity(v);
 
   setSolidness(df::SOFT);
+  df::Sound* p_sound = RM.getSound("fire");
+  if (p_sound) p_sound->play();
 }
 
 Hero::Hero() {
@@ -144,4 +147,7 @@ void Hero::nuke() {
 
   df::EventView ev("Nukes", -1, true);
   WM.onEvent(&ev);
+
+  df::Sound* p_sound = RM.getSound("nuke");
+  if (p_sound) p_sound->play();
 }
