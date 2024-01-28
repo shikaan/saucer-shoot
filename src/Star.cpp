@@ -5,8 +5,8 @@
 #include "WorldManager.h"
 
 void Star::out() {
-  df::Vector p((float)(WM.getBoundary().getHorizontal() + rand() % 20),
-               (float)(rand() % (int)WM.getBoundary().getVertical()));
+  df::Vector p((float)(WM.getBoundary().getWidth() + rand() % 20),
+               (float)(rand() % (int)WM.getBoundary().getHeight()));
   setPosition(p);
   setVelocity(getRandomVelocity());
 }
@@ -21,8 +21,8 @@ Star::Star() {
   setVelocity(getRandomVelocity());
   setAltitude(0);
 
-  df::Vector p((float)(rand() % (int)WM.getBoundary().getHorizontal()),
-               (float)(rand() % (int)WM.getBoundary().getVertical()));
+  df::Vector p((float)(rand() % (int)WM.getBoundary().getWidth()),
+               (float)(rand() % (int)WM.getBoundary().getHeight()));
   setPosition(p);
 }
 

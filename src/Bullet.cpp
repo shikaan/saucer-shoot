@@ -5,25 +5,19 @@
 #include "./Explosion.h"
 #include "./Saucer.h"
 
-void Bullet::out() {
-  WM.markForDelete(this);
-}
+void Bullet::out() { WM.markForDelete(this); }
 
-void Bullet::hit(const df::EventCollision* p_collision_event) {
-  Object* first = p_collision_event->getObject1();
-  Object* second = p_collision_event->getObject2();
+void Bullet::hit(const df::EventCollision *p_collision_event) {
+  Object *first = p_collision_event->getFirstObject();
+  Object *second = p_collision_event->getSecondObject();
 
   if (first->getType() == "Saucer" || second->getType() == "Saucer") {
     WM.markForDelete(first);
     WM.markForDelete(second);
   }
 
-  if ((first->getType() == "Saucer") && (second->getType() == "Saucer")) {
-    return;
-  }
-
   if (first->getType() == "Bullet" || second->getType() == "Bullet") {
-    Explosion* p_explosion = new Explosion;
+    Explosion *p_explosion = new Explosion;
     p_explosion->setPosition(this->getPosition());
 
     // Create an enemy when the old one dies
@@ -40,9 +34,10 @@ Bullet::Bullet(const df::Vector hero_position) {
   setSpeed(1);
 }
 
-int Bullet::eventHandler(const df::Event* p_e) {
+int Bullet::eventHandler(const df::Event *p_e) {
   if (p_e->getType() == df::COLLISION_EVENT) {
-    const df::EventCollision* p_collision_event = dynamic_cast<const df::EventCollision*>(p_e);
+    const df::EventCollision *p_collision_event =
+        dynamic_cast<const df::EventCollision *>(p_e);
     hit(p_collision_event);
     return 1;
   }

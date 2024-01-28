@@ -8,7 +8,7 @@ Reticle::Reticle() {
   setType("Reticle");
   setSolidness(df::SPECTRAL);
   setAltitude(df::MAX_ALTITUDE);
-  registerInterest(df::MSE_EVENT);
+  subscribe(df::MSE_EVENT);
 }
 
 int Reticle::draw(void) {

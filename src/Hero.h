@@ -4,7 +4,7 @@
 #include "Object.h"
 
 class Hero : public df::Object {
- private:
+private:
   void kbd(const df::EventKeyboard *p_keyboard_event);
   void mouse(const df::EventMouse *p_mouse_event);
   void move(int dy);
@@ -19,7 +19,7 @@ class Hero : public df::Object {
   int nuke_count;
   Reticle *p_reticle;
 
- public:
+public:
   Hero();
   ~Hero();
   int eventHandler(const df::Event *p_e) override;

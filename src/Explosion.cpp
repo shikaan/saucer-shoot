@@ -1,5 +1,6 @@
 #include "Explosion.h"
 #include "EventStep.h"
+#include "ResourceManager.h"
 #include "WorldManager.h"
 
 void Explosion::step() {
@@ -13,16 +14,16 @@ Explosion::Explosion() {
 
   if (setSprite("explosion") == 0) {
     time_to_live = getAnimation().getSprite()->getFrameCount();
-  }
-  else {
+  } else {
     time_to_live = 0;
   }
 
   setSolidness(df::SPECTRAL);
-  registerInterest(df::STEP_EVENT);
+  subscribe(df::STEP_EVENT);
+  RM.getSound("explode")->play();
 }
 
-int Explosion::eventHandler(const df::Event* p_event) {
+int Explosion::eventHandler(const df::Event *p_event) {
   if (p_event->getType() == df::STEP_EVENT) {
     step();
     return 1;

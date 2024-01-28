@@ -1,6 +1,5 @@
 #include "GameManager.h"
 #include "LogManager.h"
-#include "Pause.h"
 #include "ResourceManager.h"
 #include "src/GameStart.h"
 #include "src/Hero.h"
@@ -25,7 +24,8 @@ void loadResources(void) {
 }
 
 void populateWorld(void) {
-  for (int i = 0; i < 16; i++) new Star;
+  for (int i = 0; i < 16; i++)
+    new Star;
 
   new GameStart();
 }
@@ -41,12 +41,8 @@ int main(int argc, char *argv[]) {
   // Set flush of logfile during development (when done, make false).
   LM.setFlush(true);
 
-  // Show splash screen.
-  df::splash();
-
   loadResources();
   populateWorld();
-  new df::Pause(df::Keyboard::F10);
 
   GM.run();
 

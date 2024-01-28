@@ -4,10 +4,10 @@
 
 Points::Points() {
   setLocation(df::TOP_RIGHT);
-  setViewString(POINTS_STRING);
+  setLabel(POINTS_STRING);
   setColor(df::YELLOW);
 
-  registerInterest(df::STEP_EVENT);
+  subscribe(df::STEP_EVENT);
 }
 
 int Points::eventHandler(const df::Event *p_e) {

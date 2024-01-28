@@ -5,8 +5,6 @@
 #include "EventOut.h"
 #include "EventView.h"
 #include "Explosion.h"
-#include "GameManager.h"
-#include "LogManager.h"
 #include "Points.h"
 #include "ResourceManager.h"
 #include "WorldManager.h"
@@ -20,7 +18,7 @@ Saucer::Saucer() {
 
   moveToStart();
 
-  registerInterest(NUKE_EVENT);
+  subscribe(NUKE_EVENT);
 }
 
 Saucer::~Saucer() {
@@ -60,8 +58,8 @@ void Saucer::out() {
 void Saucer::moveToStart() {
   df::Vector temp_position;
 
-  float world_h = WM.getBoundary().getHorizontal();
-  float world_v = WM.getBoundary().getVertical();
+  float world_h = WM.getBoundary().getWidth();
+  float world_v = WM.getBoundary().getHeight();
 
   temp_position.setX(world_h + rand() % (int)world_h + 3.0f);
   temp_position.setY(rand() % (int)(world_v - 4) + 3.0f);
@@ -76,13 +74,14 @@ void Saucer::moveToStart() {
 }
 
 void Saucer::hit(const df::EventCollision *p_event_collision) {
-  if (p_event_collision->getObject1()->getType() == "Hero" ||
-      p_event_collision->getObject2()->getType() == "Hero") {
-    WM.markForDelete(p_event_collision->getObject1());
-    WM.markForDelete(p_event_collision->getObject2());
+  if (p_event_collision->getFirstObject()->getType() == "Hero" ||
+      p_event_collision->getSecondObject()->getType() == "Hero") {
+    WM.markForDelete(p_event_collision->getFirstObject());
+    WM.markForDelete(p_event_collision->getSecondObject());
 
     df::Sound *p_sound = RM.getSound("explode");
-    if (p_sound) p_sound->play();
+    if (p_sound)
+      p_sound->play();
   }
 }
 

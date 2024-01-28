@@ -15,14 +15,14 @@
 #
 
 # Compiler.
-CC= g++
+CC= clang++
 
-LINKDIR= -L./lib
-INCDIR= -I./include
+LINKDIR= -L../game-engine/lib
+INCDIR= -I../game-engine/include
 
 CFLAGS= -Wall
 LINKLIB= -l$(ENG) -lsfml-graphics -lsfml-window -lsfml-system -lsfml-audio -lrt
-ENG= dragonfly-x64-linux
+ENG= dragonfly
 
 ######
 
@@ -31,7 +31,7 @@ GAMESRC= src/Bullet.cpp src/Hero.cpp src/Saucer.cpp src/Reticle.cpp src/Explosio
 GAME= game.cpp
 EXECUTABLE= game
 OBJECTS= $(GAMESRC:.cpp=.o)
-CFLAGS:= $(CFLAGS) -std=c++11
+CFLAGS:= $(CFLAGS) -std=c++20
 
 .PHONY: all clean
 

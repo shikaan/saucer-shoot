@@ -1,5 +1,3 @@
 #include "EventNuke.h"
 
-EventNuke::EventNuke() {
-  setType(NUKE_EVENT);
-}
+EventNuke::EventNuke() { setType(NUKE_EVENT); }
